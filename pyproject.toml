@@ -6,6 +6,8 @@ authors = ["narumi <toucans-cutouts0f@icloud.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pydantic = "^2.8.2"
+httpx = "^0.27.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
