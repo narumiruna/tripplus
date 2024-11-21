@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 from typing import Literal
 
-import httpx
+import cloudscraper
 from pydantic import BaseModel
 from pydantic import Field
 
@@ -22,7 +22,7 @@ class RedemptionRequest(BaseModel):
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
         }
-        resp = httpx.get(url, headers=headers, params=self.model_dump())
+        resp = cloudscraper.create_scraper().get(url, headers=headers, params=self.model_dump())
         resp.raise_for_status()
 
         return RedemptionResponse.model_validate(resp.json())
