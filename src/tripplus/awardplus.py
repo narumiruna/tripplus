@@ -5,14 +5,15 @@ from typing import Literal
 
 import httpx
 from pydantic import BaseModel
+from pydantic import Field
 
 
 # https://www.tripplus.cc/api/awardplus/query/?ori=TPE&dst=KIX&cabin=c&type=rt&programs=ALL
 class RedemptionRequest(BaseModel):
-    ori: str
-    dst: str
-    cabin: Literal["y", "c", "f"] = "y"  # y: economy, c: business, f: first
-    type: Literal["ow", "rt"] = "ow"  # ow: one way, rt: round trip
+    ori: str = Field(..., description="Origin airport code")
+    dst: str = Field(..., description="Destination airport code")
+    cabin: Literal["y", "c", "f"] = Field(default="y", description="Cabin class, y: economy, c: business, f: first")
+    type: Literal["ow", "rt"] = Field(default="ow", description="Redemption type, ow: one way, rt: round trip")
     programs: str = "ALL"
 
     def do(self) -> RedemptionResponse:
